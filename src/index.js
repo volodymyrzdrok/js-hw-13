@@ -4,6 +4,12 @@ import apiService from './js/apiService.js';
 import updateArticlesMarkup from './js/update-articles-markup.js';
 import refs from './js/refs';
 
+// import basicLightbox from 'basiclightbox';
+
+// const htmlInstance = basicLightbox.create(document.querySelector('#html'));
+// const imageInstance = basicLightbox.create(document.querySelector('#image'));
+// document.querySelector('button.image').onclick = imageInstance.show;
+
 refs.searchForm.addEventListener(
   'input',
   debounce(() => {
@@ -13,13 +19,16 @@ refs.searchForm.addEventListener(
 
 function setUrl() {
   apiService.query = refs.searchInput.value;
-  if (apiService.query === '') {
-    return;
-  }
   apiService.resetPage();
+  refs.loadMoreBtn.classList.add('is-hidden');
   refs.articlesContainer.innerHTML = '';
   apiService.fetchArticles().then(hits => {
     updateArticlesMarkup(hits);
+    refs.loadMoreBtn.classList.remove('is-hidden');
+    window.scrollTo({
+      top: document.documentElement.offsetHeight,
+      behavior: 'smooth',
+    });
   });
 }
 
