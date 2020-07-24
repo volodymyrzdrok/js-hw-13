@@ -4,12 +4,18 @@ import apiService from './js/apiService.js';
 import updateArticlesMarkup from './js/update-articles-markup.js';
 import refs from './js/refs';
 
-// import basicLightbox from 'basiclightbox';
+import * as basicLightbox from 'basiclightbox';
+import 'basiclightbox/dist/basicLightbox.min.css';
 
-// const htmlInstance = basicLightbox.create(document.querySelector('#html'));
-// const imageInstance = basicLightbox.create(document.querySelector('#image'));
-// document.querySelector('button.image').onclick = imageInstance.show;
+refs.articlesContainer.addEventListener('click', onePage);
 
+function onePage(event) {
+  const instance = basicLightbox.create(
+    `<img   src="${event.target.dataset.source}" /> `,
+  );
+
+  instance.show();
+}
 refs.searchForm.addEventListener(
   'input',
   debounce(() => {
