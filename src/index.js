@@ -10,11 +10,13 @@ import 'basiclightbox/dist/basicLightbox.min.css';
 refs.articlesContainer.addEventListener('click', onePage);
 
 function onePage(event) {
-  const instance = basicLightbox.create(
-    `<img   src="${event.target.dataset.source}" /> `,
-  );
+  if (event.target.nodeName === 'IMG') {
+    const instance = basicLightbox.create(
+      `<img   src="${event.target.dataset.source}" /> `,
+    );
 
-  instance.show();
+    instance.show();
+  }
 }
 refs.searchForm.addEventListener(
   'input',
