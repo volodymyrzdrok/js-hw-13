@@ -98,4 +98,11 @@ body {
 
 img {
   cursor: pointer;
+  border-radius: 3px;
+  transition: transform 210ms ease-in-out;
+}
+
+img:hover {
+  transform: scale(1.04);
+  box-shadow: 4px 7px 24px 8px rgba(29, 29, 27, 0.11);
 }
